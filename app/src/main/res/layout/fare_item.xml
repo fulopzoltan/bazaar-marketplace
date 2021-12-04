@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="16dp"
+    android:elevation="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/fare_item_image"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/fare_item_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.258" />
+
+        <TextView
+            android:id="@+id/fare_item_price"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="25 Ron/L"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fare_item_image" />
+
+        <Button
+            android:id="@+id/fare_item_order_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="92dp"
+            android:background="@color/black"
+            android:drawableLeft="@drawable/ic_baseline_shopping_cart_24"
+            android:text="Order now"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fare_item_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
+
+        <TextView
+            android:id="@+id/fare_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="P{alinka}de prune"
+            android:textColor="@color/black"
+            android:textFontWeight="700"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.201"
+            app:layout_constraintStart_toEndOf="@+id/fare_item_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fare_item_seller_avatar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/avatar_small"
+            app:layout_constraintBottom_toBottomOf="@+id/fare_item_seller_name"
+            app:layout_constraintStart_toStartOf="@+id/fare_item_name"
+            app:layout_constraintTop_toTopOf="@+id/fare_item_seller_name" />
+
+        <TextView
+            android:id="@+id/fare_item_seller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Kristina Watson"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintStart_toEndOf="@+id/fare_item_seller_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
