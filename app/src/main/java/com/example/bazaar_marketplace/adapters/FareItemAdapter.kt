@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bazaar_marketplace.R
+import com.example.bazaar_marketplace.models.Product
 
-class FareItemAdapter(private val FareItemList: List<FareDummy>) :
+class FareItemAdapter(private var fareItemList: List<Product>) :
     RecyclerView.Adapter<FareItemAdapter.FareItemViewHolder>() {
     class FareItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemPrice: TextView = itemView.findViewById(R.id.fare_item_price)
@@ -22,12 +23,15 @@ class FareItemAdapter(private val FareItemList: List<FareDummy>) :
     }
 
     override fun onBindViewHolder(holder: FareItemViewHolder, position: Int) {
-        val current = FareItemList[position]
-        holder.itemName.text = current.itemName
-        holder.itemPrice.text = "${current.price} ${current.unit}"
-        holder.sellerName.text = current.sellerName
+        val current = fareItemList[position]
+        holder.itemName.text = current.title
+        holder.itemPrice.text = "${current.pricePerUnit} ${current.priceType}/ ${current.amountType}"
+        holder.sellerName.text = current.username
     }
 
-    override fun getItemCount(): Int = FareItemList.size
+    override fun getItemCount(): Int = fareItemList.size
 
+    fun setData(newList: List<Product>){
+        fareItemList = newList
+    }
 }
