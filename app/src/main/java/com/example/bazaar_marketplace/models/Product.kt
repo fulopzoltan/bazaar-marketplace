@@ -1,8 +1,6 @@
 package com.example.bazaar_marketplace.models
 
 import com.google.gson.annotations.SerializedName
-import java.sql.Timestamp
-
 
 data class ProductsResponse(
     @SerializedName("item_count")
