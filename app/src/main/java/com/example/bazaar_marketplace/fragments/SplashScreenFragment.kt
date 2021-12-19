@@ -9,10 +9,8 @@ import com.example.bazaar_marketplace.R
 
 import android.os.Handler
 import android.os.Looper
-import com.example.bazaar_marketplace.utils.Navigator
-import com.example.bazaar_marketplace.utils.hide
-import com.example.bazaar_marketplace.utils.longSnackbar
-import com.example.bazaar_marketplace.utils.show
+import com.example.bazaar_marketplace.fragments.login.LoginFragment
+import com.example.bazaar_marketplace.utils.*
 
 
 class SplashScreenFragment : Fragment() {
@@ -21,8 +19,7 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar).visibility =
-            View.GONE
+        requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar).remove()
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }
 
@@ -38,14 +35,12 @@ class SplashScreenFragment : Fragment() {
                     .show()
                 Handler(Looper.getMainLooper()).postDelayed(
                     {
-                        Navigator.replaceFragment(TimelineFragment())
-                        requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-                            .show()
+                        Navigator.replaceFragment(LoginFragment())
                     },
                     1500
                 )
             },
-            2000
+            1500
         )
     }
 }

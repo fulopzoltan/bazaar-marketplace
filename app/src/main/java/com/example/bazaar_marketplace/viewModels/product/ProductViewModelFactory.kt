@@ -1,4 +1,4 @@
-package com.example.bazaar_marketplace.viewModels
+package com.example.bazaar_marketplace.viewModels.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
