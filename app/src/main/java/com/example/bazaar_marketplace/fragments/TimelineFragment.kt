@@ -1,10 +1,10 @@
 package com.example.bazaar_marketplace.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bazaar_marketplace.adapters.FareItemAdapter
@@ -28,7 +28,7 @@ class TimelineFragment : Fragment() {
             requireActivity(),
             ProductViewModelFactory(Repository())
         )[ProductViewModel::class.java]
-        adapter = FareItemAdapter(emptyList());
+        adapter = FareItemAdapter(emptyList())
         binding.fareRecyclerView.adapter = adapter
         productViewModel.products.observe(viewLifecycleOwner) {
             adapter.setData(productViewModel.products.value!!.products)

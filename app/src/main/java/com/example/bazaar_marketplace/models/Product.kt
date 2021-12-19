@@ -25,7 +25,7 @@ data class Product(
     val units: String,
     val description: String,
     val title: String,
-    val images : List<String>,
+    val images: List<String>,
     @SerializedName("creation_time")
     val dateCreated: Long,
     val messages: List<String>

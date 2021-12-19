@@ -25,13 +25,14 @@ class FareItemAdapter(private var fareItemList: List<Product>) :
     override fun onBindViewHolder(holder: FareItemViewHolder, position: Int) {
         val current = fareItemList[position]
         holder.itemName.text = current.title
-        holder.itemPrice.text = "${current.pricePerUnit} ${current.priceType}/ ${current.amountType}"
+        holder.itemPrice.text =
+            "${current.pricePerUnit} ${current.priceType}/ ${current.amountType}"
         holder.sellerName.text = current.username
     }
 
     override fun getItemCount(): Int = fareItemList.size
 
-    fun setData(newList: List<Product>){
+    fun setData(newList: List<Product>) {
         fareItemList = newList
     }
 }

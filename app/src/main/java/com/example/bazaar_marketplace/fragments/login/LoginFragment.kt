@@ -1,11 +1,11 @@
 package com.example.bazaar_marketplace.fragments.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.databinding.FragmentLoginBinding
@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         loginViewModel = ViewModelProvider(
             requireActivity(),
             LoginViewModelFactory(Repository())

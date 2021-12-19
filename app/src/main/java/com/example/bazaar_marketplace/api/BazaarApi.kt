@@ -6,5 +6,8 @@ import retrofit2.http.Header
 
 interface BazaarApi {
     @GET("/products")
-    suspend fun getProducts(@Header("token") token: String, @Header("sort") sort: String = "{\"creation_time\" : 1}"): ProductsResponse
+    suspend fun getProducts(
+        @Header("token") token: String,
+        @Header("sort") sort: String = "{\"creation_time\" : 1}"
+    ): ProductsResponse
 }
