@@ -11,6 +11,7 @@ import android.os.Handler
 import android.os.Looper
 import com.example.bazaar_marketplace.utils.Navigator
 import com.example.bazaar_marketplace.utils.hide
+import com.example.bazaar_marketplace.utils.longSnackbar
 import com.example.bazaar_marketplace.utils.show
 
 
