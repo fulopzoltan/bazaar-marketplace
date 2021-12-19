@@ -14,3 +14,8 @@ data class LoginResponse(
     val refreshTime: Long,
 
     )
+
+data class LoginBody(
+    val username: String,
+    val password: String
+)
