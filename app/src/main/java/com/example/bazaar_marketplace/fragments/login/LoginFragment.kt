@@ -1,6 +1,9 @@
 package com.example.bazaar_marketplace.fragments.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +15,7 @@ import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.databinding.FragmentLoginBinding
 import com.example.bazaar_marketplace.fragments.TimelineFragment
 import com.example.bazaar_marketplace.repository.Repository
-import com.example.bazaar_marketplace.utils.Navigator
-import com.example.bazaar_marketplace.utils.isRequiredFieldAndNotEmpty
-import com.example.bazaar_marketplace.utils.longSnackbar
-import com.example.bazaar_marketplace.utils.show
+import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.login.LoginViewModel
 import com.example.bazaar_marketplace.viewModels.login.LoginViewModelFactory
 
@@ -23,11 +23,25 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var sharedPreferences: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedPreferences = requireActivity().application.getSharedPreferences(
+            Constants.SHARED_PREF_KEY,
+            Context.MODE_PRIVATE
+        )
+        redirectIfLoggedIn()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        //Hide toolbar
+        requireActivity().findViewById<Toolbar>(R.id.toolbar).remove()
+
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         loginViewModel = ViewModelProvider(
             requireActivity(),
@@ -39,11 +53,16 @@ class LoginFragment : Fragment() {
                 requireActivity().longSnackbar(binding.root, "Invalid credentials")
             }
         }
-
         loginViewModel.loginResponse.observe(viewLifecycleOwner) {
             if (loginViewModel.loginResponseError.value == false) {
                 requireActivity().findViewById<Toolbar>(R.id.toolbar).show()
                 requireActivity().longSnackbar(binding.root, "Login Successful")
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveToken(it1.token) }
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveEmail(it1.email) }
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.savePhoneNum(it1.phoneNumber) }
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveTokenCreation(it1.creationTime) }
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveTokenRefresh(it1.refreshTime) }
+                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveUsername(it1.username) }
                 Navigator.replaceFragment(TimelineFragment())
             }
         }
@@ -85,5 +104,13 @@ class LoginFragment : Fragment() {
         if (error) return;
 
         loginViewModel.login(username, password)
+    }
+
+    private fun redirectIfLoggedIn() {
+        Log.d("SHARED", sharedPreferences.toString())
+        val token = sharedPreferences.getToken()
+        if (token != null && token.isNotEmpty()) {
+            Navigator.replaceFragment(TimelineFragment())
+        }
     }
 }
