@@ -52,16 +52,20 @@ class TimelineFragment : Fragment() {
         )[ProductViewModel::class.java]
         adapter = FareItemAdapter(emptyList())
         binding.fareRecyclerView.adapter = adapter
+
         productViewModel.products.observe(viewLifecycleOwner) {
-            if(productViewModel.products.value?.products?.size!! > 0){
+            if(productViewModel.products.value?.body()!!.products.isNotEmpty()){
                 binding.progressBar.remove()
             }else{
                 binding.progressBar.show()
             }
         }
-        productViewModel.products.observe(viewLifecycleOwner) {
-            adapter.setData(productViewModel.products.value!!.products)
-            adapter.notifyDataSetChanged()
+
+        productViewModel.products.observe(viewLifecycleOwner) { response->
+            if(response.isSuccessful) {
+                adapter.setData(productViewModel.products.value?.body()!!.products)
+                adapter.notifyDataSetChanged()
+            }
         }
         binding.fareRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
 

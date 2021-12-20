@@ -50,11 +50,6 @@ class LoginFragment : Fragment() {
             LoginViewModelFactory(Repository())
         )[LoginViewModel::class.java]
 
-        loginViewModel.loginResponseError.observe(viewLifecycleOwner) {
-            if (loginViewModel.loginResponseError.value == true) {
-                requireActivity().longSnackbar(binding.root, "Invalid credentials")
-            }
-        }
         return binding.root
     }
 
@@ -91,6 +86,26 @@ class LoginFragment : Fragment() {
         }
 
         if (error) return;
+
+        loginViewModel.loginResponse.observe(viewLifecycleOwner) { response ->
+
+            if (response.isSuccessful) {
+                val body = response.body()
+                requireActivity().findViewById<Toolbar>(R.id.toolbar).show()
+                requireActivity().longSnackbar(binding.root, "Login Successful")
+                if (body != null) {
+                    sharedPreferences.saveToken(body.token)
+                    sharedPreferences.saveEmail(body.email)
+                    sharedPreferences.savePhoneNum(body.phoneNumber)
+                    sharedPreferences.saveTokenCreation(body.creationTime)
+                    sharedPreferences.saveTokenRefresh(body.refreshTime)
+                    sharedPreferences.saveUsername(body.username)
+                }
+                Navigator.replaceFragment(TimelineFragment())
+            } else {
+                requireActivity().longSnackbar(binding.root, "Invalid credentials")
+            }
+        }
 
         loginViewModel.login(username, password)
     }
