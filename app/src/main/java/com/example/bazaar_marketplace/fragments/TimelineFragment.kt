@@ -17,6 +17,7 @@ import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TimelineFragment : Fragment() {
 
