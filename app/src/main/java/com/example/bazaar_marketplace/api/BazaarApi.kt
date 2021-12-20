@@ -1,8 +1,6 @@
 package com.example.bazaar_marketplace.api
 
-import com.example.bazaar_marketplace.models.LoginBody
-import com.example.bazaar_marketplace.models.LoginResponse
-import com.example.bazaar_marketplace.models.ProductsResponse
+import com.example.bazaar_marketplace.models.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,4 +18,9 @@ interface BazaarApi {
     suspend fun login(
         @Body loginBody: LoginBody
     ): Response<LoginResponse>
+
+    @POST("user/register")
+    suspend fun register(
+        @Body registerBody: RegisterBody
+    ): Response<GeneralResponse>
 }

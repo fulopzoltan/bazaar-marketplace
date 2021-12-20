@@ -28,10 +28,13 @@ object Navigator {
         Log.d("NAVI", fragmentContainerId.toString())
     }
 
-    fun replaceFragment(newFragment: Fragment) {
+    fun replaceFragment(newFragment: Fragment, addToBackStack: Boolean = false) {
         if (fragmentManager != null) {
             val transaction = fragmentManager!!.beginTransaction()
             transaction.replace(fragmentContainerId!!, newFragment)
+            if(addToBackStack){
+                transaction.addToBackStack(newFragment.javaClass.name)
+            }
             transaction.commit()
         }
     }

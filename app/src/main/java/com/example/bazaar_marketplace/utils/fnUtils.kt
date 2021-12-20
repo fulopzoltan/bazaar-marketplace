@@ -57,12 +57,12 @@ fun SharedPreferences.getEmail(): String? {
     return this.getString(Constants.USER_EMAIL, "")
 }
 
-fun SharedPreferences.savePhoneNum(phoneNum: Int) {
-    this.edit().putInt(Constants.USER_PHONENUM, phoneNum).apply()
+fun SharedPreferences.savePhoneNum(phoneNum: Long) {
+    this.edit().putLong(Constants.USER_PHONENUM, phoneNum).apply()
 }
 
-fun SharedPreferences.getPhoneNum(): Int {
-    return this.getInt(Constants.USER_PHONENUM, 0)
+fun SharedPreferences.getPhoneNum(): Long {
+    return this.getLong(Constants.USER_PHONENUM, 0)
 }
 
 

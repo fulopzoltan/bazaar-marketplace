@@ -1,9 +1,7 @@
 package com.example.bazaar_marketplace.repository
 
 import com.example.bazaar_marketplace.api.RetrofitInstance
-import com.example.bazaar_marketplace.models.LoginBody
-import com.example.bazaar_marketplace.models.LoginResponse
-import com.example.bazaar_marketplace.models.ProductsResponse
+import com.example.bazaar_marketplace.models.*
 import retrofit2.Response
 
 class Repository {
@@ -13,5 +11,9 @@ class Repository {
 
     suspend fun login(loginBody: LoginBody): Response<LoginResponse> {
         return RetrofitInstance.api.login(loginBody)
+    }
+
+    suspend fun register(registerBody: RegisterBody):Response<GeneralResponse>{
+        return RetrofitInstance.api.register(registerBody)
     }
 }

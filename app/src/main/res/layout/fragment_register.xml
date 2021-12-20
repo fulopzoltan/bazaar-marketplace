@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#161616"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.auth.register.RegisterFragment"
     android:padding="16dp"
-    tools:context=".fragments.auth.login.LoginFragment">
+    android:background="#161616">
 
     <ImageView
         android:id="@+id/appLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bazaar_logo_color"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:background="#212121"
-        android:minHeight="493dp"
+        android:minHeight="567dp"
         android:padding="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log in"
+            android:text="Register"
             android:textColor="@color/white"
             android:textFontWeight="500"
             android:textSize="16sp"
@@ -46,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="24dp"
-            android:hint="Email"
+            android:hint="Username"
             android:textColorHint="@color/white"
             app:boxStrokeColor="#00B5C0"
             app:errorEnabled="true"
@@ -68,6 +69,63 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/emailBoxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Email"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="#00B5C0"
+            app:endIconTint="@color/white"
+            app:errorEnabled="true"
+            app:errorTextColor="#EE3B02"
+            app:hintTextColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/usernameBoxLayout"
+            tools:layout_editor_absoluteX="40dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailBox"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:inputType="text"
+                android:textColor="@color/white"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/phoneNumBoxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Phone number"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="#00B5C0"
+            app:endIconTint="@color/white"
+            app:errorEnabled="true"
+            app:errorTextColor="#EE3B02"
+            app:hintTextColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/emailBoxLayout"
+            tools:layout_editor_absoluteX="40dp"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumBox"
+                android:textCursorDrawable="@null"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:textColor="@color/white"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/passwordBoxLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -79,7 +137,7 @@
             app:errorEnabled="true"
             app:errorTextColor="#EE3B02"
             app:hintTextColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/usernameBoxLayout"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumBoxLayout"
             tools:layout_editor_absoluteX="40dp"
             >
 
@@ -96,7 +154,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/logInButton"
+            android:id="@+id/registerButton"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="42dp"
@@ -104,19 +162,20 @@
             android:backgroundTint="#00B5C0"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="Log in"
+            android:text="Register"
             android:textAllCaps="false"
             android:textColor="#212121"
             android:textSize="14sp"
             app:cornerRadius="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/forgotLayout" />
+            app:layout_constraintBottom_toTopOf="@+id/forgotLayout"
+            app:layout_constraintTop_toBottomOf="@+id/passwordBoxLayout"/>
 
         <LinearLayout
             android:id="@+id/forgotLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@id/registerButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -124,61 +183,22 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot password?"
+                android:text="Already have an account?"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/forgotPassword"
+                android:id="@+id/logIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Click Here!"
+                android:text="Log in!"
                 android:textColor="#00B5C0"
-                app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintStart_toEndOf="@+id/textView3" />
+                 />
         </LinearLayout>
 
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="16dp"
-            android:alpha="0.12"
-            android:background="#EEEEEE"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            tools:layout_editor_absoluteX="40dp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="New to Bazaar?"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/signUpButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signUpButton"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:backgroundTint="#212121"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="Sign Up"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:strokeColor="#EEEEEE"
-            tools:layout_editor_absoluteX="64dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

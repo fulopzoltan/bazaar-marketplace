@@ -9,7 +9,7 @@ import com.example.bazaar_marketplace.R
 
 import android.os.Handler
 import android.os.Looper
-import com.example.bazaar_marketplace.fragments.login.LoginFragment
+import com.example.bazaar_marketplace.fragments.auth.login.LoginFragment
 import com.example.bazaar_marketplace.utils.*
 
 

@@ -1,4 +1,4 @@
-package com.example.bazaar_marketplace.fragments.login
+package com.example.bazaar_marketplace.fragments.auth.login
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.databinding.FragmentLoginBinding
 import com.example.bazaar_marketplace.fragments.TimelineFragment
+import com.example.bazaar_marketplace.fragments.auth.register.RegisterFragment
 import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.login.LoginViewModel
@@ -56,6 +57,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.logInButton.setOnClickListener { onLoginClick() }
+        binding.signUpButton.setOnClickListener{
+            Navigator.replaceFragment(RegisterFragment(),true)
+        }
+
         binding.passwordBox.doOnTextChanged { inputText, _, _, _ ->
             if (isRequiredFieldAndNotEmpty(inputText.toString())) {
                 binding.passwordBoxLayout.error = null
