@@ -55,27 +55,6 @@ class LoginFragment : Fragment() {
                 requireActivity().longSnackbar(binding.root, "Invalid credentials")
             }
         }
-        loginViewModel.loginResponse.observe(viewLifecycleOwner) {
-            if (loginViewModel.loginResponseError.value == false) {
-                requireActivity().findViewById<Toolbar>(R.id.toolbar).show()
-                requireActivity().longSnackbar(binding.root, "Login Successful")
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveToken(it1.token) }
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveEmail(it1.email) }
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.savePhoneNum(it1.phoneNumber) }
-                loginViewModel.loginResponse.value?.let { it1 ->
-                    sharedPreferences.saveTokenCreation(
-                        it1.creationTime
-                    )
-                }
-                loginViewModel.loginResponse.value?.let { it1 ->
-                    sharedPreferences.saveTokenRefresh(
-                        it1.refreshTime
-                    )
-                }
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveUsername(it1.username) }
-                Navigator.replaceFragment(TimelineFragment())
-            }
-        }
         return binding.root
     }
 
