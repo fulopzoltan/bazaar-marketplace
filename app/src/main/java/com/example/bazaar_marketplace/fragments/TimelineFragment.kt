@@ -14,9 +14,7 @@ import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.adapters.FareItemAdapter
 import com.example.bazaar_marketplace.databinding.FragmentTimelineBinding
 import com.example.bazaar_marketplace.repository.Repository
-import com.example.bazaar_marketplace.utils.Constants
-import com.example.bazaar_marketplace.utils.getToken
-import com.example.bazaar_marketplace.utils.show
+import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModelFactory
 
@@ -38,8 +36,10 @@ class TimelineFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Show toolbar
+        //Show toolbar and nav
+
         requireActivity().findViewById<Toolbar>(R.id.toolbar).show()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).show()
 
         //Binding
         binding = FragmentTimelineBinding.inflate(inflater, container, false)
@@ -51,6 +51,13 @@ class TimelineFragment : Fragment() {
         )[ProductViewModel::class.java]
         adapter = FareItemAdapter(emptyList())
         binding.fareRecyclerView.adapter = adapter
+        productViewModel.products.observe(viewLifecycleOwner) {
+            if(productViewModel.products.value?.products?.size!! > 0){
+                binding.progressBar.remove()
+            }else{
+                binding.progressBar.show()
+            }
+        }
         productViewModel.products.observe(viewLifecycleOwner) {
             adapter.setData(productViewModel.products.value!!.products)
             adapter.notifyDataSetChanged()

@@ -18,6 +18,7 @@ import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.login.LoginViewModel
 import com.example.bazaar_marketplace.viewModels.login.LoginViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LoginFragment : Fragment() {
 
@@ -39,8 +40,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        //Hide toolbar
+        //Hide toolbar and Navbar
         requireActivity().findViewById<Toolbar>(R.id.toolbar).remove()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation).remove()
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         loginViewModel = ViewModelProvider(
@@ -60,8 +62,16 @@ class LoginFragment : Fragment() {
                 loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveToken(it1.token) }
                 loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveEmail(it1.email) }
                 loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.savePhoneNum(it1.phoneNumber) }
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveTokenCreation(it1.creationTime) }
-                loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveTokenRefresh(it1.refreshTime) }
+                loginViewModel.loginResponse.value?.let { it1 ->
+                    sharedPreferences.saveTokenCreation(
+                        it1.creationTime
+                    )
+                }
+                loginViewModel.loginResponse.value?.let { it1 ->
+                    sharedPreferences.saveTokenRefresh(
+                        it1.refreshTime
+                    )
+                }
                 loginViewModel.loginResponse.value?.let { it1 -> sharedPreferences.saveUsername(it1.username) }
                 Navigator.replaceFragment(TimelineFragment())
             }
