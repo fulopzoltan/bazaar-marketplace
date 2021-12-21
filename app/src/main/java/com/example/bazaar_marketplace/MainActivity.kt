@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bazaar_marketplace.fragments.TimelineFragment
+import com.example.bazaar_marketplace.fragments.profile.ProfileFragment
 
 import com.example.bazaar_marketplace.utils.Navigator
 
@@ -59,17 +60,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
 
-        profileIcon.setOnClickListener{
-
-        }
-
-        filterIcon.setOnClickListener{
+        profileIcon.setOnClickListener {
+            Navigator.replaceFragment(ProfileFragment(), true)
 
         }
 
-        searchIcon.setOnClickListener{
+        filterIcon.setOnClickListener {
+
+        }
+
+        searchIcon.setOnClickListener {
 
         }
     }

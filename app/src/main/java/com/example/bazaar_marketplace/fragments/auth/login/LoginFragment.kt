@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
                 }
                 Navigator.replaceFragment(TimelineFragment())
             } else {
-                requireActivity().longSnackbar(binding.root, "Invalid credentials")
+                requireActivity().longSnackbar(binding.root, "No such User or Invalid credentials")
             }
         }
 

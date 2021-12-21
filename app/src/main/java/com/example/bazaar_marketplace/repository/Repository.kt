@@ -13,7 +13,15 @@ class Repository {
         return RetrofitInstance.api.login(loginBody)
     }
 
-    suspend fun register(registerBody: RegisterBody):Response<GeneralResponse>{
+    suspend fun register(registerBody: RegisterBody): Response<GeneralResponse> {
         return RetrofitInstance.api.register(registerBody)
+    }
+
+    suspend fun updateUser(
+        token: String,
+        profileUpdateBody: ProfileUpdateBody
+    ): Response<ProfileUpdateResponse> {
+        return RetrofitInstance.api.updateUser(token, profileUpdateBody)
+//        return RetrofitInstance.api.updateUser(token, profileUpdateBody.username,profileUpdateBody.email,profileUpdateBody.phoneNumber)
     }
 }
