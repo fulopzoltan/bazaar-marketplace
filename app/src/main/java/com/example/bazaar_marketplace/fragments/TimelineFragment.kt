@@ -14,10 +14,7 @@ import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.adapters.FareItemAdapter
 import com.example.bazaar_marketplace.databinding.FragmentTimelineBinding
 import com.example.bazaar_marketplace.repository.Repository
-import com.example.bazaar_marketplace.utils.Constants
-import com.example.bazaar_marketplace.utils.getToken
-import com.example.bazaar_marketplace.utils.hide
-import com.example.bazaar_marketplace.utils.show
+import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,7 +51,7 @@ class TimelineFragment : Fragment() {
             requireActivity(),
             ProductViewModelFactory(Repository())
         )[ProductViewModel::class.java]
-        adapter = FareItemAdapter(emptyList())
+        adapter = FareItemAdapter(emptyList(),"")
         binding.fareRecyclerView.adapter = adapter
 
         productViewModel.products.observe(viewLifecycleOwner) {
@@ -72,7 +69,8 @@ class TimelineFragment : Fragment() {
 
         productViewModel.products.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful && productViewModel.products.value?.body() != null) {
-                adapter.setData(productViewModel.products.value?.body()!!.products)
+                val username = sharedPreferences.getUsername()
+                adapter.setData(productViewModel.products.value?.body()!!.products, username!!)
                 adapter.notifyDataSetChanged()
             }
         }

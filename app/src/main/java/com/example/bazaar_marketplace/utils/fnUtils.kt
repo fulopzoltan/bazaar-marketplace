@@ -103,3 +103,7 @@ fun SharedPreferences.clearAllData() {
     }
     editor.apply()
 }
+
+// Extension functions to remove " from String
+
+fun String.removeQuote() = this.replace("\"", "")

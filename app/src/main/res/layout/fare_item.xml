@@ -39,6 +39,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
             android:id="@+id/fare_item_order_button"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="150dp"
@@ -54,6 +55,35 @@
             app:icon="@drawable/ic_shopping_cart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/fare_item_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:text="Active"
+            android:textAllCaps="false"
+            android:textColor="#00B5C0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:drawableLeftCompat="@drawable/ic_active" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/fare_item_inactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:text="Inactive"
+            android:textAllCaps="false"
+            android:textColor="#9A9A9A"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:drawableLeftCompat="@drawable/ic_inactive" />
 
         <ImageView
             android:id="@+id/fare_item_seller_avatar"
