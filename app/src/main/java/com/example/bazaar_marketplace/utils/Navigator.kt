@@ -23,11 +23,6 @@ object Navigator {
         Navigator.fragmentManager = fragmentManager
     }
 
-    fun printContext() {
-        Log.d("NAVI", currentActivity.toString())
-        Log.d("NAVI", fragmentContainerId.toString())
-    }
-
     fun replaceFragment(newFragment: Fragment, addToBackStack: Boolean = false) {
         if (fragmentManager != null) {
             val transaction = fragmentManager!!.beginTransaction()

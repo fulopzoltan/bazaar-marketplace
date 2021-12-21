@@ -116,7 +116,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun redirectIfLoggedIn() {
-        Log.d("SHARED", sharedPreferences.toString())
         val token = sharedPreferences.getToken()
         if (token != null && token.isNotEmpty()) {
             Navigator.replaceFragment(TimelineFragment())

@@ -71,7 +71,7 @@ class RegisterFragment : Fragment() {
         if (error) return;
 
         registerViewModel.registerResponse.observe(viewLifecycleOwner) { response ->
-            Log.d("REGISTER_RESP", response.toString())
+
             val message = response.message()
             if (response.isSuccessful) {
                 requireActivity().longSnackbar(

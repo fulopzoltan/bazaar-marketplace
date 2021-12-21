@@ -82,8 +82,7 @@ class ProfileFragment : Fragment() {
         val token = sharedPreferences.getToken()
 
         profileViewModel.profileUpdateResponse.observe(viewLifecycleOwner) { response ->
-            Log.d("RESP", response.toString())
-            Log.d("RESP", response.raw().toString())
+
 
             if (response.isSuccessful) {
                 val body = response.body()
@@ -94,7 +93,7 @@ class ProfileFragment : Fragment() {
                     sharedPreferences.saveTokenCreation(it.updatedData.creationTime)
                     sharedPreferences.saveUsername(it.updatedData.username)
                 }
-                Log.d("RESP", body.toString())
+
                 requireActivity().longSnackbar(binding.root, response.message())
             } else {
                 requireActivity().longSnackbar(binding.root, response.message())
