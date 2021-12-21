@@ -75,6 +75,10 @@ class LoginFragment : Fragment() {
                 binding.usernameBoxLayout.error = "Please provide a username"
             }
         }
+
+        binding.forgotPassword.setOnClickListener{
+            Navigator.replaceFragment(ResetPasswordFragment(),true)
+        }
     }
 
     private fun onLoginClick() {

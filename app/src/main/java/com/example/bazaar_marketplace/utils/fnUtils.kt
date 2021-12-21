@@ -3,6 +3,7 @@ package com.example.bazaar_marketplace.utils
 import android.app.Activity
 import android.content.SharedPreferences
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 
@@ -30,6 +31,10 @@ fun Activity.shortSnackbar(view: View, message: String) =
 
 fun isRequiredFieldAndNotEmpty(inputField: String): Boolean {
     return !TextUtils.isEmpty(inputField)
+}
+
+fun isValidEmail(inputField: String): Boolean {
+    return !TextUtils.isEmpty(inputField) && Patterns.EMAIL_ADDRESS.matcher(inputField).matches()
 }
 
 // SHARED PREF UTILS

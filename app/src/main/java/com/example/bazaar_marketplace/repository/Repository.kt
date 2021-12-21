@@ -22,6 +22,9 @@ class Repository {
         profileUpdateBody: ProfileUpdateBody
     ): Response<ProfileUpdateResponse> {
         return RetrofitInstance.api.updateUser(token, profileUpdateBody)
-//        return RetrofitInstance.api.updateUser(token, profileUpdateBody.username,profileUpdateBody.email,profileUpdateBody.phoneNumber)
+    }
+
+    suspend fun resetPassword(resetPasswordBody: ResetPasswordBody): Response<GeneralResponse> {
+        return RetrofitInstance.api.resetPassword(resetPasswordBody)
     }
 }

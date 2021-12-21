@@ -14,6 +14,7 @@ import com.example.bazaar_marketplace.models.RegisterBody
 import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.Navigator
 import com.example.bazaar_marketplace.utils.isRequiredFieldAndNotEmpty
+import com.example.bazaar_marketplace.utils.isValidEmail
 import com.example.bazaar_marketplace.utils.longSnackbar
 import com.example.bazaar_marketplace.viewModels.register.RegisterViewModel
 import com.example.bazaar_marketplace.viewModels.register.RegisterViewModelFactory
@@ -59,9 +60,9 @@ class RegisterFragment : Fragment() {
             error = true;
             binding.passwordBoxLayout.error = "Please provide a password"
         }
-        if (!isRequiredFieldAndNotEmpty(email)) {
+        if (!isValidEmail(email)) {
             error = true;
-            binding.emailBoxLayout.error = "Please provide an email"
+            binding.emailBoxLayout.error = "Please provide a valid email!"
         }
         if (!isRequiredFieldAndNotEmpty(phoneNum)) {
             error = true;
@@ -104,10 +105,10 @@ class RegisterFragment : Fragment() {
             }
         }
         binding.emailBox.doOnTextChanged { inputText, _, _, _ ->
-            if (isRequiredFieldAndNotEmpty(inputText.toString())) {
+            if (isValidEmail(inputText.toString())) {
                 binding.emailBoxLayout.error = null
             } else {
-                binding.emailBoxLayout.error = "Please provide an email"
+                binding.emailBoxLayout.error = "Please provide a valid email!"
             }
         }
         binding.phoneNumBox.doOnTextChanged { inputText, _, _, _ ->

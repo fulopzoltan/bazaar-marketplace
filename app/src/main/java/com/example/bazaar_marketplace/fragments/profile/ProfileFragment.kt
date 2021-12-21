@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,9 +67,9 @@ class ProfileFragment : Fragment() {
             error = true;
             binding.usernameBoxLayout.error = "Please provide a username"
         }
-        if (!isRequiredFieldAndNotEmpty(email)) {
+        if (!isValidEmail(email)) {
             error = true;
-            binding.emailBoxLayout.error = "Please provide an email"
+            binding.emailBoxLayout.error = "Please provide a valid email!"
         }
         if (!isRequiredFieldAndNotEmpty(phoneNum)) {
             error = true;
@@ -116,10 +115,10 @@ class ProfileFragment : Fragment() {
             }
         }
         binding.emailBox.doOnTextChanged { inputText, _, _, _ ->
-            if (isRequiredFieldAndNotEmpty(inputText.toString())) {
+            if (isValidEmail(inputText.toString())) {
                 binding.emailBoxLayout.error = null
             } else {
-                binding.emailBoxLayout.error = "Please provide an email"
+                binding.emailBoxLayout.error = "Please provide a valid email!"
             }
         }
         binding.phoneNumBox.doOnTextChanged { inputText, _, _, _ ->

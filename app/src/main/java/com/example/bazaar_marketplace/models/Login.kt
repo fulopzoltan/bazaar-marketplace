@@ -19,3 +19,9 @@ data class LoginBody(
     val username: String,
     val password: String
 )
+
+
+data class ResetPasswordBody(
+    val username: String,
+    val email: String
+)

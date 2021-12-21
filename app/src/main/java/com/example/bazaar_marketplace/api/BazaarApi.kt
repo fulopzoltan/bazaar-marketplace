@@ -29,40 +29,9 @@ interface BazaarApi {
         @Body profileUpdateBody: ProfileUpdateBody
     ): Response<ProfileUpdateResponse>
 
-//    @Multipart
-//    @POST("/user/update")
-//    suspend fun updateUser(
-//        @Header("token") token: String,
-//        @Part("username") username: String,
-//        @Part("email") email: String,
-//        @Part("phone_number") phoneNumber: String,
-//    ): Response<ProfileUpdateResponse>
+    @POST("/user/reset")
+    suspend fun resetPassword(
+        @Body resetPasswordBody:ResetPasswordBody
+    ): Response<GeneralResponse>
+
 }
-
-
-//data class ProfileUpdateBody(
-//    val username: String,
-//    val email: String,
-//    @SerializedName("phone_number")
-//    val phoneNumber: Long,
-//)
-
-
-//data class ProfileUpdateResponse(
-//    val code: String,
-//    val updatedData: UpdatedData,
-//    val timestamp: Long
-//)
-//
-//data class UpdatedData(
-//    val username: String,
-//    @SerializedName("phone_number")
-//    val phoneNumber: Long,
-//    val email: String,
-//    val firebase_token: String,
-//    @SerializedName("is_activated")
-//    val isActivated: Boolean,
-//    @SerializedName("creation_time")
-//    val creationTime: Long,
-//    val token: String
-//)

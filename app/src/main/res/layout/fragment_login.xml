@@ -44,7 +44,7 @@
             android:id="@+id/usernameBoxLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="88dp"
             android:layout_marginTop="24dp"
             android:hint="Email"
             android:textColorHint="@color/white"
@@ -58,19 +58,19 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameBox"
                 android:layout_width="match_parent"
-                android:textCursorDrawable="@null"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
                 android:textColor="@color/white"
+                android:textCursorDrawable="@null"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/passwordBoxLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="88dp"
             android:hint="Password"
             android:textColorHint="@color/white"
             app:boxStrokeColor="#00B5C0"
@@ -80,17 +80,16 @@
             app:errorTextColor="#EE3B02"
             app:hintTextColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/usernameBoxLayout"
-            tools:layout_editor_absoluteX="40dp"
-            >
+            tools:layout_editor_absoluteX="40dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordBox"
-                android:textCursorDrawable="@null"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
+                android:textCursorDrawable="@null"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +99,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#00B5C0"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -109,7 +108,8 @@
             android:textColor="#212121"
             android:textSize="14sp"
             app:cornerRadius="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/forgotLayout" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordBoxLayout" />
 
         <LinearLayout
             android:id="@+id/forgotLayout"
