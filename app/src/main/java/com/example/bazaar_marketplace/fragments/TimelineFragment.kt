@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.adapters.FareItemAdapter
 import com.example.bazaar_marketplace.databinding.FragmentTimelineBinding
+import com.example.bazaar_marketplace.fragments.product.ProductDetailFragment
 import com.example.bazaar_marketplace.interfaces.FareItemClickListeners
 import com.example.bazaar_marketplace.models.Product
 import com.example.bazaar_marketplace.repository.Repository
@@ -59,6 +60,7 @@ class TimelineFragment : Fragment() {
 
         override fun onCardClicked(product: Product) {
             productViewModel.selectForDetail(product)
+            Navigator.replaceFragment(ProductDetailFragment(), true)
         }
     }
 
@@ -143,7 +145,8 @@ class TimelineFragment : Fragment() {
     private fun filter(text: String) {
         productViewModel.products.value?.body()?.let { productsResponse ->
             val filtered = productsResponse.products.filter { product ->
-                product.username.lowercase(Locale.getDefault()).contains(text) || product.title.lowercase(Locale.getDefault()).contains(text)
+                product.username.lowercase(Locale.getDefault())
+                    .contains(text) || product.title.lowercase(Locale.getDefault()).contains(text)
             }
             adapter.setFiltered(filtered.toMutableList())
             adapter.notifyDataSetChanged()

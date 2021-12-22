@@ -1,10 +1,9 @@
-package com.example.bazaar_marketplace.fragments
+package com.example.bazaar_marketplace.fragments.product
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bazaar_marketplace.databinding.FragmentAddProductBinding
+import com.example.bazaar_marketplace.fragments.MyMarketFragment
 import com.example.bazaar_marketplace.models.AddProductBody
+import com.example.bazaar_marketplace.models.Product
+import com.example.bazaar_marketplace.models.ProductUpdateBody
 import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
@@ -24,6 +26,8 @@ class AddProductFragment : Fragment() {
     private lateinit var binding: FragmentAddProductBinding
     private lateinit var productViewModel: ProductViewModel
     private lateinit var sharedPreferences: SharedPreferences
+    private var isEditing: Boolean = false
+    private lateinit var currentProduct: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,10 @@ class AddProductFragment : Fragment() {
             Constants.SHARED_PREF_KEY,
             Context.MODE_PRIVATE
         )
+        val editing = this.arguments?.getBoolean("EDITING")
+        if (editing != null) {
+            isEditing = editing
+        }
     }
 
     override fun onCreateView(
@@ -42,12 +50,30 @@ class AddProductFragment : Fragment() {
             requireActivity(),
             ProductViewModelFactory(Repository())
         )[ProductViewModel::class.java]
-
+        currentProduct = productViewModel.selectedForDetail
+        if (isEditing) {
+            fillInputs()
+            binding.addProductButton.text = "Update my fare"
+        }
         initStatusSwitch()
         initContactDetails()
         setUpChangeEvents()
         binding.addProductButton.setOnClickListener { onAddProduct() }
         return binding.root
+    }
+
+    private fun fillInputs() {
+        binding.statusSwitch.isChecked = currentProduct.isActive
+        binding.titleBox.text = Editable.Factory.getInstance().newEditable(currentProduct.title)
+        binding.descriptionBox.text =
+            Editable.Factory.getInstance().newEditable(currentProduct.description)
+        binding.priceBox.text =
+            Editable.Factory.getInstance().newEditable(currentProduct.pricePerUnit)
+        binding.currencyBox.text =
+            Editable.Factory.getInstance().newEditable(currentProduct.priceType)
+        binding.amountBox.text = Editable.Factory.getInstance().newEditable(currentProduct.units)
+        binding.priceUnitBox.text =
+            Editable.Factory.getInstance().newEditable(currentProduct.amountType)
     }
 
     private fun initContactDetails() {
@@ -60,15 +86,28 @@ class AddProductFragment : Fragment() {
     }
 
     private fun initStatusSwitch() {
+
+        fun active() {
+            binding.activeCheck.show()
+            binding.inactiveCheck.remove()
+        }
+
+        fun inActive() {
+            binding.activeCheck.remove()
+            binding.inactiveCheck.show()
+        }
+        if (binding.statusSwitch.isChecked) {
+            active()
+        } else {
+            inActive()
+        }
         binding.statusSwitch.setOnClickListener {
             when (binding.statusSwitch.isChecked) {
                 true -> {
-                    binding.activeCheck.show()
-                    binding.inactiveCheck.remove()
+                    active()
                 }
                 else -> {
-                    binding.activeCheck.remove()
-                    binding.inactiveCheck.show()
+                    inActive()
                 }
             }
         }
@@ -110,19 +149,33 @@ class AddProductFragment : Fragment() {
             binding.descriptionBoxLayout.error = "Field required*"
         }
         if (error) return;
-
-        productViewModel.addResponse.observe(viewLifecycleOwner) { response ->
-            if (response.isSuccessful) {
-                requireActivity().longSnackbar(binding.root, "Product added successfully")
-                Navigator.replaceFragment(MyMarketFragment())
+        val token = sharedPreferences.getToken()
+        if (isEditing) {
+            productViewModel.updateResponse.observe(viewLifecycleOwner) { response ->
+                if (response.isSuccessful) {
+                    requireActivity().longSnackbar(binding.root, "Product updated successfully")
+                    Navigator.replaceFragment(MyMarketFragment())
+                }
             }
+            productViewModel.updateProduct(
+                token!!,
+                currentProduct.productId,
+                ProductUpdateBody(title, unit, description, price, currency, amount, active, 4.9)
+            )
+        } else {
+            productViewModel.addResponse.observe(viewLifecycleOwner) { response ->
+                if (response.isSuccessful) {
+                    requireActivity().longSnackbar(binding.root, "Product added successfully")
+                    Navigator.replaceFragment(MyMarketFragment())
+                }
+            }
+            productViewModel.addProduct(
+                token!!,
+                AddProductBody(title, description, price, amount, active, unit, currency, 5.0)
+            )
         }
 
-        val token = sharedPreferences.getToken()
-        productViewModel.addProduct(
-            token!!,
-            AddProductBody(title, description, price, amount, active, unit, currency, 5.0)
-        )
+
     }
 
     private fun setUpChangeEvents() {

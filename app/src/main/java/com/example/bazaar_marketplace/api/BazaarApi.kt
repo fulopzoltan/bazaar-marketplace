@@ -39,6 +39,21 @@ interface BazaarApi {
         @Part("rating") rating: Double
     ): Response<AddProductResponse>
 
+    @FormUrlEncoded
+    @POST("/products/update")
+    suspend fun updateProduct(
+        @Header("Token") token: String,
+        @Query("product_id") productId: String,
+        @Field("title") title: String,
+        @Field("amount_type") amountType: String,
+        @Field("description") description: String,
+        @Field("price_per_unit") pricePerUnit: String,
+        @Field("price_type") priceType:String,
+        @Field("units") units: String,
+        @Field("is_active") isActive: Boolean,
+        @Field("rating") rating: Double,
+    ): Response<GeneralResponse>
+
     @POST("/user/login")
     suspend fun login(
         @Body loginBody: LoginBody

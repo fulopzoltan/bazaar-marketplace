@@ -57,3 +57,18 @@ data class AddProductBody(
     val currency: String,
     val rating: Double
 )
+
+data class ProductUpdateBody(
+    val title: String,
+    @SerializedName("amount_type")
+    val amountType: String,
+    val description: String,
+    @SerializedName("price_per_unit")
+    val pricePerUnit: String,
+    @SerializedName("price_type")
+    val priceType: String,
+    val units: String,
+    @SerializedName("is_active")
+    val isActive: Boolean,
+    val rating: Double
+)

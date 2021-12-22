@@ -34,6 +34,25 @@ class Repository {
         )
     }
 
+    suspend fun updateProduct(
+        token: String,
+        productId: String,
+        profileUpdateBody: ProductUpdateBody
+    ): Response<GeneralResponse> {
+        return RetrofitInstance.api.updateProduct(
+            token,
+            productId,
+            profileUpdateBody.title,
+            profileUpdateBody.amountType,
+            profileUpdateBody.description,
+            profileUpdateBody.pricePerUnit,
+            profileUpdateBody.priceType,
+            profileUpdateBody.units,
+            profileUpdateBody.isActive,
+            profileUpdateBody.rating
+        )
+    }
+
     suspend fun login(loginBody: LoginBody): Response<LoginResponse> {
         return RetrofitInstance.api.login(loginBody)
     }

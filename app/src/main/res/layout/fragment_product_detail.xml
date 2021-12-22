@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.product.ProductDetailFragment">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="202dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/detail_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/avatar_big"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_edit"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:text="username"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Title"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/priceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="45"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+
+    <TextView
+        android:id="@+id/currencyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="RON/"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/priceText"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/unitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="L"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/currencyText"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/fare_item_active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Active"
+        android:textAllCaps="false"
+        android:textColor="@color/bazaar_green"
+        android:visibility="gone"
+        app:drawableLeftCompat="@drawable/ic_active"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/fare_item_inactive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Inactive"
+        android:textAllCaps="false"
+        android:textColor="#9A9A9A"
+        android:visibility="gone"
+        app:drawableLeftCompat="@drawable/ic_inactive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Description"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceText" />
+
+
+    <TextView
+        android:id="@+id/totalItemCircle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/shape_circle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:text="45"
+
+        android:textColor="@color/bazaar_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Total items"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/totalItemCircle"
+        app:layout_constraintStart_toStartOf="@+id/totalItemCircle"
+        app:layout_constraintTop_toBottomOf="@+id/totalItemCircle" />
+
+    <TextView
+        android:id="@+id/priceCircle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/shape_circle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:text="45"
+        android:textColor="@color/bazaar_green"
+        app:layout_constraintEnd_toStartOf="@+id/soldCircle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/totalItemCircle"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Price/item"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/priceCircle"
+        app:layout_constraintStart_toStartOf="@+id/priceCircle"
+        app:layout_constraintTop_toBottomOf="@+id/priceCircle" />
+
+    <TextView
+        android:id="@+id/soldCircle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/shape_circle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="45"
+        android:textColor="@color/bazaar_green"
+        app:layout_constraintEnd_toStartOf="@+id/revenueCircle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/priceCircle"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Sold items"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/soldCircle"
+        app:layout_constraintStart_toStartOf="@+id/soldCircle"
+        app:layout_constraintTop_toBottomOf="@+id/soldCircle" />
+
+    <TextView
+        android:id="@+id/revenueCircle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:autoSizeMaxTextSize="18sp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/shape_circle"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:text="45"
+        android:textColor="@color/bazaar_green"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Revenue"
+        android:textColor="@color/bazaar_background_dark"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/revenueCircle"
+        app:layout_constraintStart_toStartOf="@+id/revenueCircle"
+        app:layout_constraintTop_toBottomOf="@+id/revenueCircle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
