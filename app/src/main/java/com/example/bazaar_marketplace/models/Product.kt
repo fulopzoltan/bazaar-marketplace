@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ProductsResponse(
     @SerializedName("item_count")
     val itemCount: Int,
-    val products: List<Product>,
+    val products: MutableList<Product>,
     val timestamp: Long
 )
 
@@ -29,4 +29,13 @@ data class Product(
     @SerializedName("creation_time")
     val dateCreated: Long,
     val messages: List<String>
+)
+
+
+data class DeleteProductResponse(
+    val messages: String,
+    @SerializedName("product_id")
+    val productId: String,
+    @SerializedName("deletion_time")
+    val deletionTime: Long
 )

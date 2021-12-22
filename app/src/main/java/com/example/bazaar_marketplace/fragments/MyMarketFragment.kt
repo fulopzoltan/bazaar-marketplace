@@ -1,22 +1,24 @@
 package com.example.bazaar_marketplace.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bazaar_marketplace.R
 import com.example.bazaar_marketplace.adapters.FareItemAdapter
 import com.example.bazaar_marketplace.databinding.FragmentMyMarketBinding
+import com.example.bazaar_marketplace.interfaces.FareItemClickListeners
+import com.example.bazaar_marketplace.models.Product
 import com.example.bazaar_marketplace.repository.Repository
 import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModelFactory
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MyMarketFragment : Fragment() {
 
@@ -24,6 +26,37 @@ class MyMarketFragment : Fragment() {
     private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: FareItemAdapter
     private lateinit var sharedPreferences: SharedPreferences
+
+    private val fareItemClickListeners = object : FareItemClickListeners {
+        override fun onDeleteClicked(pos: Int, productId: String) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setMessage("Are you sure you want to Delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    productViewModel.deleteResponse.observe(viewLifecycleOwner) { response ->
+                        Log.d("POS", response.toString())
+                        if (response.isSuccessful) {
+                            Log.d("POS", pos.toString())
+                            adapter.notifyItemRemoved(pos)
+                            productViewModel.myProducts.value?.body()?.products?.removeAt(pos)
+                            productViewModel.deleteResponse.removeObservers(viewLifecycleOwner)
+                            requireActivity().shortSnackbar(binding.root, "Delete successful!")
+                        }
+                    }
+                    productViewModel.deleteProduct(sharedPreferences.getToken()!!, productId, pos)
+
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+        }
+
+        override fun onCardClicked(product: Product) {
+            productViewModel.selectForDetail(product)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +78,7 @@ class MyMarketFragment : Fragment() {
             ProductViewModelFactory(Repository())
         )[ProductViewModel::class.java]
 
-        adapter = FareItemAdapter(emptyList(), "")
+        adapter = FareItemAdapter(mutableListOf(), fareItemClickListeners, "")
         binding.myFareRecyclerView.adapter = adapter
         binding.myFareRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
 

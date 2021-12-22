@@ -13,6 +13,10 @@ class Repository {
         return RetrofitInstance.api.getProductsFiltered(token, filter)
     }
 
+    suspend fun deleteProduct(token: String, productId: String): Response<DeleteProductResponse> {
+        return RetrofitInstance.api.deleteProduct(token, productId)
+    }
+
     suspend fun login(loginBody: LoginBody): Response<LoginResponse> {
         return RetrofitInstance.api.login(loginBody)
     }

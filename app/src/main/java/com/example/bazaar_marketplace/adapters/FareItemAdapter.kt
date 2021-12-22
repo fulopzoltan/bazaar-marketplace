@@ -4,17 +4,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bazaar_marketplace.R
+import com.example.bazaar_marketplace.interfaces.FareItemClickListeners
 import com.example.bazaar_marketplace.models.Product
 import com.example.bazaar_marketplace.utils.remove
 import com.example.bazaar_marketplace.utils.removeQuote
 import com.example.bazaar_marketplace.utils.show
 
-class FareItemAdapter(private var fareItemList: List<Product>, private var currentUser: String) :
+class FareItemAdapter(
+    private var fareItemList: MutableList<Product>,
+    private val clickListeners: FareItemClickListeners,
+    private var currentUser: String
+) :
     RecyclerView.Adapter<FareItemAdapter.FareItemViewHolder>() {
 
     class FareItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,16 +31,28 @@ class FareItemAdapter(private var fareItemList: List<Product>, private var curre
         val orderButton: Button = itemView.findViewById(R.id.fare_item_order_button)
         val inactiveText: TextView = itemView.findViewById(R.id.fare_item_inactive)
         val activeText: TextView = itemView.findViewById(R.id.fare_item_active)
-
+        val deleteButton: ImageButton = itemView.findViewById(R.id.delete_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FareItemViewHolder {
         val fareItemView =
             LayoutInflater.from(parent.context).inflate(R.layout.fare_item, parent, false)
-        return FareItemViewHolder(fareItemView)
+
+        val holder = FareItemViewHolder(fareItemView)
+        holder.itemView.setOnClickListener {
+            clickListeners.onCardClicked(fareItemList[holder.adapterPosition])
+        }
+        holder.deleteButton.setOnClickListener {
+            clickListeners.onDeleteClicked(
+                holder.adapterPosition,
+                fareItemList[holder.adapterPosition].productId
+            )
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: FareItemViewHolder, position: Int) {
+
         fun showButton() {
             holder.orderButton.show()
             holder.inactiveText.remove()
@@ -70,6 +88,7 @@ class FareItemAdapter(private var fareItemList: List<Product>, private var curre
         holder.sellerName.text = current.username.removeQuote()
 
         if (current.username == currentUser) {
+            holder.deleteButton.show()
             if (current.isActive) {
                 showActive()
             } else {
@@ -77,12 +96,13 @@ class FareItemAdapter(private var fareItemList: List<Product>, private var curre
             }
         } else {
             showButton()
+            holder.deleteButton.remove()
         }
     }
 
     override fun getItemCount(): Int = fareItemList.size
 
-    fun setData(newList: List<Product>, currentUser: String) {
+    fun setData(newList: MutableList<Product>, currentUser: String) {
         fareItemList = newList
         this.currentUser = currentUser
     }

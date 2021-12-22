@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bazaar_green">#00B5C0</color>
+    <color name="bazaar_background_dark">#161616</color>
+    <color name="bazaar_background_lighter">#212121</color>
 </resources>

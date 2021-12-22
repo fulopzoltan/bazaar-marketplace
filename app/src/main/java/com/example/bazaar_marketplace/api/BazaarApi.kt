@@ -2,10 +2,7 @@ package com.example.bazaar_marketplace.api
 
 import com.example.bazaar_marketplace.models.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface BazaarApi {
     @GET("/products")
@@ -20,6 +17,12 @@ interface BazaarApi {
         @Header("filter") filter: String,
         @Header("sort") sort: String = "{\"creation_time\" : 1}"
     ): Response<ProductsResponse>
+
+    @POST("/products/remove")
+    suspend fun deleteProduct(
+        @Header("token") token: String,
+        @Query("product_id") productId: String
+    ): Response<DeleteProductResponse>
 
     @POST("/user/login")
     suspend fun login(

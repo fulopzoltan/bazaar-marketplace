@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.auth.register.RegisterFragment"
     android:padding="16dp"
-    android:background="#161616">
+    android:background="@color/bazaar_background_dark">
 
     <ImageView
         android:id="@+id/appLogo"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:background="#212121"
+        android:background="@color/bazaar_background_lighter"
         android:minHeight="567dp"
         android:padding="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
             android:layout_marginTop="24dp"
             android:hint="Username"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="#00B5C0"
+            app:boxStrokeColor="@color/bazaar_green"
             app:errorEnabled="true"
             app:errorTextColor="#EE3B02"
             app:hintTextColor="@color/white"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:hint="Email"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="#00B5C0"
+            app:boxStrokeColor="@color/bazaar_green"
             app:endIconTint="@color/white"
             app:errorEnabled="true"
             app:errorTextColor="#EE3B02"
@@ -102,7 +102,7 @@
             android:layout_height="match_parent"
             android:hint="Phone number"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="#00B5C0"
+            app:boxStrokeColor="@color/bazaar_green"
             app:endIconTint="@color/white"
             app:errorEnabled="true"
             app:errorTextColor="#EE3B02"
@@ -131,7 +131,7 @@
             android:layout_height="match_parent"
             android:hint="Password"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="#00B5C0"
+            app:boxStrokeColor="@color/bazaar_green"
             app:endIconMode="password_toggle"
             app:endIconTint="@color/white"
             app:errorEnabled="true"
@@ -159,12 +159,12 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="#00B5C0"
+            android:backgroundTint="@color/bazaar_green"
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="Register"
             android:textAllCaps="false"
-            android:textColor="#212121"
+            android:textColor="@color/bazaar_background_lighter"
             android:textSize="14sp"
             app:cornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/forgotLayout"
@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Log in!"
-                android:textColor="#00B5C0"
+                android:textColor="@color/bazaar_green"
                  />
         </LinearLayout>
 
