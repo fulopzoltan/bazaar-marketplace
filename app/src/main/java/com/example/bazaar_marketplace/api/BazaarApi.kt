@@ -24,6 +24,20 @@ interface BazaarApi {
         @Query("product_id") productId: String
     ): Response<DeleteProductResponse>
 
+    @Multipart
+    @POST("/products/add")
+    suspend fun addProduct(
+        @Header("token") token: String,
+        @Part("title") title: String,
+        @Part("description") description: String,
+        @Part("price_per_unit") pricePerUnit: String,
+        @Part("units") amount: String,
+        @Part("is_active") isActive: Boolean,
+        @Part("amount_type") amountType: String,
+        @Part("price_type") currency: String,
+        @Part("rating") rating: Double
+    ):Response<AddProductResponse>
+
     @POST("/user/login")
     suspend fun login(
         @Body loginBody: LoginBody

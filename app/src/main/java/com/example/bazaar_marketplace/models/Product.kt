@@ -39,3 +39,21 @@ data class DeleteProductResponse(
     @SerializedName("deletion_time")
     val deletionTime: Long
 )
+
+
+data class AddProductResponse(
+    val creation: String,
+    val product_id: String,
+    val creation_time: String,
+)
+
+data class AddProductBody(
+    val title: String,
+    val description: String,
+    val pricePerUnit: String,
+    val amount: String,
+    val isActive: Boolean,
+    val amountType: String,
+    val currency: String,
+    val rating: Double
+)

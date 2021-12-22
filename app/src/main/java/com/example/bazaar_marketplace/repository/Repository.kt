@@ -17,6 +17,23 @@ class Repository {
         return RetrofitInstance.api.deleteProduct(token, productId)
     }
 
+    suspend fun addProduct(
+        token: String,
+        productBody: AddProductBody
+    ): Response<AddProductResponse> {
+        return RetrofitInstance.api.addProduct(
+            token,
+            productBody.title,
+            productBody.description,
+            productBody.pricePerUnit,
+            productBody.amount,
+            productBody.isActive,
+            productBody.amountType,
+            productBody.currency,
+            productBody.rating
+        )
+    }
+
     suspend fun login(loginBody: LoginBody): Response<LoginResponse> {
         return RetrofitInstance.api.login(loginBody)
     }

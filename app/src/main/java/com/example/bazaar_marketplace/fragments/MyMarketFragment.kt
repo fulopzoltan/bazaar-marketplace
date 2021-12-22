@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +97,11 @@ class MyMarketFragment : Fragment() {
         }
         val token = sharedPreferences.getToken()
         productViewModel.getMyProducts(token!!, username!!)
+
+
+        binding.addActionButton.setOnClickListener {
+            Navigator.replaceFragment(AddProductFragment(), true)
+        }
 
         return binding.root
     }
