@@ -34,9 +34,7 @@ class MyMarketFragment : Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Yes") { dialog, id ->
                     productViewModel.deleteResponse.observe(viewLifecycleOwner) { response ->
-                        Log.d("POS", response.toString())
                         if (response.isSuccessful) {
-                            Log.d("POS", pos.toString())
                             adapter.notifyItemRemoved(pos)
                             productViewModel.myProducts.value?.body()?.products?.removeAt(pos)
                             productViewModel.deleteResponse.removeObservers(viewLifecycleOwner)
