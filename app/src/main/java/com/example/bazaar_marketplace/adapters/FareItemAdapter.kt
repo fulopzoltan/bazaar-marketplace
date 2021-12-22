@@ -69,7 +69,7 @@ class FareItemAdapter(private var fareItemList: List<Product>, private var curre
             "${current.pricePerUnit.removeQuote()} ${current.priceType.removeQuote()}/ ${current.amountType.removeQuote()}"
         holder.sellerName.text = current.username.removeQuote()
 
-        if (current.username == "Endre") {
+        if (current.username == currentUser) {
             if (current.isActive) {
                 showActive()
             } else {

@@ -9,6 +9,10 @@ class Repository {
         return RetrofitInstance.api.getProducts(token)
     }
 
+    suspend fun getProductsFiltered(token: String, filter: String): Response<ProductsResponse> {
+        return RetrofitInstance.api.getProductsFiltered(token, filter)
+    }
+
     suspend fun login(loginBody: LoginBody): Response<LoginResponse> {
         return RetrofitInstance.api.login(loginBody)
     }

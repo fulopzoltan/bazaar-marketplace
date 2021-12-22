@@ -5,11 +5,10 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bazaar_marketplace.fragments.MyMarketFragment
 import com.example.bazaar_marketplace.fragments.TimelineFragment
 import com.example.bazaar_marketplace.fragments.profile.ProfileFragment
-
 import com.example.bazaar_marketplace.utils.Navigator
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -41,19 +40,19 @@ class MainActivity : AppCompatActivity() {
 
             when (item.itemId) {
                 R.id.timelinePage -> {
-                    Navigator.replaceFragment(TimelineFragment())
+                    Navigator.replaceFragment(TimelineFragment(), true)
                     true
                 }
                 R.id.myMarketPage -> {
-                    Navigator.replaceFragment(TimelineFragment())
+                    Navigator.replaceFragment(MyMarketFragment(), true)
                     true
                 }
                 R.id.myFarePage -> {
-                    Navigator.replaceFragment(TimelineFragment())
+                    Navigator.replaceFragment(TimelineFragment(), true)
                     true
                 }
                 else -> {
-                    Navigator.replaceFragment(TimelineFragment())
+                    Navigator.replaceFragment(TimelineFragment(), true)
                     true
                 }
             }
