@@ -107,5 +107,9 @@ class FareItemAdapter(
         this.currentUser = currentUser
     }
 
+    fun setFiltered(newList: MutableList<Product>) {
+        fareItemList = newList
+    }
+
 
 }

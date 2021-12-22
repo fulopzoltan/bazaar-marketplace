@@ -4,11 +4,13 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toolbar
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,7 @@ import com.example.bazaar_marketplace.utils.*
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModel
 import com.example.bazaar_marketplace.viewModels.product.ProductViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class TimelineFragment : Fragment() {
 
@@ -29,6 +32,7 @@ class TimelineFragment : Fragment() {
     private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: FareItemAdapter
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var searchIcon: ImageView
 
     private val fareItemClickListeners = object : FareItemClickListeners {
         override fun onDeleteClicked(pos: Int, productId: String) {
@@ -65,6 +69,7 @@ class TimelineFragment : Fragment() {
             Constants.SHARED_PREF_KEY,
             Context.MODE_PRIVATE
         )
+        searchIcon = requireActivity().findViewById(R.id.searchIcon)
     }
 
     override fun onCreateView(
@@ -109,6 +114,39 @@ class TimelineFragment : Fragment() {
 
         val token = sharedPreferences.getToken()
         productViewModel.getProducts(token!!)
+
+        searchIcon.setOnClickListener {
+            if (binding.searchView.isVisible) {
+                binding.searchView.remove()
+            } else {
+                binding.searchView.show()
+            }
+        }
+
+        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    filter(newText.lowercase(Locale.getDefault()))
+                }
+                return true
+            }
+        })
+
+
         return binding.root
+    }
+
+    private fun filter(text: String) {
+        productViewModel.products.value?.body()?.let { productsResponse ->
+            val filtered = productsResponse.products.filter { product ->
+                product.username.lowercase(Locale.getDefault()).contains(text) || product.title.lowercase(Locale.getDefault()).contains(text)
+            }
+            adapter.setFiltered(filtered.toMutableList())
+            adapter.notifyDataSetChanged()
+        }
     }
 }

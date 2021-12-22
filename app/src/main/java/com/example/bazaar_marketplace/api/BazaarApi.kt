@@ -8,7 +8,8 @@ interface BazaarApi {
     @GET("/products")
     suspend fun getProducts(
         @Header("token") token: String,
-        @Header("sort") sort: String = "{\"creation_time\" : 1}"
+        @Header("sort") sort: String = "{\"creation_time\" : 1}",
+        @Header("limit") limit: Int = 100
     ): Response<ProductsResponse>
 
     @GET("/products")
@@ -36,7 +37,7 @@ interface BazaarApi {
         @Part("amount_type") amountType: String,
         @Part("price_type") currency: String,
         @Part("rating") rating: Double
-    ):Response<AddProductResponse>
+    ): Response<AddProductResponse>
 
     @POST("/user/login")
     suspend fun login(
